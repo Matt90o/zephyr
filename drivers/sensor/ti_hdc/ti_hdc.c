@@ -74,28 +74,39 @@ static int ti_hdc_channel_get(struct device *dev,
 			      struct sensor_value *val)
 {
 	struct ti_hdc_data *drv_data = dev->driver_data;
-	u64_t tmp;
+//	u64_t tmp;
 
 	/*
 	 * See datasheet "Temperature Register" and "Humidity
 	 * Register" sections for more details on processing
 	 * sample data.
 	 */
-	if (chan == SENSOR_CHAN_AMBIENT_TEMP) {
-		/* val = -40 + 165 * sample / 2^16 */
-		tmp = (u64_t)drv_data->t_sample * 165U;
-		val->val1 = (s32_t)(tmp >> 16) - 40;
-		val->val2 = ((tmp & 0xFFFF) * 1000000U) >> 16;
+        //#if defined(CONFIG_TI_HDC_DATA_RAW)
+        if (chan == SENSOR_CHAN_AMBIENT_TEMP) {
+		val->val1 = drv_data->t_sample;
 	} else if (chan == SENSOR_CHAN_HUMIDITY) {
-		/* val = 100 * sample / 2^16 */
-		tmp = (u64_t)drv_data->rh_sample * 100U;
-		val->val1 = tmp >> 16;
-		/* x * 1000000 / 65536 == x * 15625 / 1024 */
-		val->val2 = ((tmp & 0xFFFF) * 15625U) >> 10;
+		val->val1 = drv_data->rh_sample;
 	} else {
 		return -ENOTSUP;
 	}
+        val->val2 = 0;
+        //#else
 
+//        if (chan == SENSOR_CHAN_AMBIENT_TEMP) {
+		/* val = -40 + 165 * sample / 2^16 */
+//		tmp = (u64_t)drv_data->t_sample * 165U;
+//		val->val1 = (s32_t)(tmp >> 16) - 40;
+//		val->val2 = ((tmp & 0xFFFF) * 1000000U) >> 16;
+//	} else if (chan == SENSOR_CHAN_HUMIDITY) {
+		/* val = 100 * sample / 2^16 */
+//		tmp = (u64_t)drv_data->rh_sample * 100U;
+//		val->val1 = tmp >> 16;
+		/* x * 1000000 / 65536 == x * 15625 / 1024 */
+//		val->val2 = ((tmp & 0xFFFF) * 15625U) >> 10;
+//	} else {
+//		return -ENOTSUP;
+//	}
+        //#endif
 	return 0;
 }
 
