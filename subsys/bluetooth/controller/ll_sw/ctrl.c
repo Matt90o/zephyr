@@ -6533,7 +6533,6 @@ again:
 static void adv_scan_conn_configure(void)
 {
 	radio_reset();
-	radio_tx_power_set(RADIO_TXP_DEFAULT);
 	radio_isr_set(isr, NULL);
 }
 

@@ -159,8 +159,6 @@ static int prepare_cb(struct lll_prepare_param *prepare_param)
 
 	/* Start setting up Radio h/w */
 	radio_reset();
-	/* TODO: other Tx Power settings */
-	radio_tx_power_set(RADIO_TXP_DEFAULT);
 
 	lll_conn_rx_pkt_set(lll);
 

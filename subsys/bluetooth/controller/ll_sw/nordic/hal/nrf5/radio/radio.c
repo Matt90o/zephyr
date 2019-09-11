@@ -306,6 +306,9 @@ void radio_status_reset(void)
 	NRF_RADIO->EVENTS_READY = 0;
 	NRF_RADIO->EVENTS_END = 0;
 	NRF_RADIO->EVENTS_DISABLED = 0;
+
+	/* TODO: other Tx Power settings */
+	radio_tx_power_set(RADIO_TXP_DEFAULT);
 }
 
 u32_t radio_is_ready(void)

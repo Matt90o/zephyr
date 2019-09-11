@@ -138,8 +138,6 @@ static int prepare_cb(struct lll_prepare_param *prepare_param)
 
 	/* Start setting up of Radio h/w */
 	radio_reset();
-	/* TODO: other Tx Power settings */
-	radio_tx_power_set(RADIO_TXP_DEFAULT);
 	radio_aa_set(lll->access_addr);
 	radio_crc_configure(((0x5bUL) | ((0x06UL) << 8) | ((0x00UL) << 16)),
 			    (((u32_t)lll->crc_init[2] << 16) |

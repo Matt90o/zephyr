@@ -145,8 +145,6 @@ static int prepare_cb(struct lll_prepare_param *prepare_param)
 	LL_ASSERT(node_rx);
 
 	radio_reset();
-	/* TODO: other Tx Power settings */
-	radio_tx_power_set(RADIO_TXP_DEFAULT);
 
 #if defined(CONFIG_BT_CTLR_ADV_EXT)
 	/* TODO: if coded we use S8? */
